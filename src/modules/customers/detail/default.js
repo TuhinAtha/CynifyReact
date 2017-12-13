@@ -43,7 +43,6 @@ class CustomerDetail extends React.Component{
 		}
 	}
 	render(){
-		debugger;
 		return(
 			<div>
 				<PageHeader title="Customer Detail"/>
@@ -53,20 +52,15 @@ class CustomerDetail extends React.Component{
 			);
 	}
 	componentDidMount() {
-		debugger;
-      this.props.loadCustomer();
+		this.props.loadCustomer();
     }
 }
 const mapStateToProps = (state) => {
-	console.log("inside state to props ccustomet detail");
-	console.log(state);
-	debugger;
 	return {
 		data : state.customer.data
 	}
 }
 const mapDispatchFromProps = (dispatch, ownProps) => {
-	debugger;
 	return {
 		loadCustomer : () => {
 			return dispatch(CustomerAction.loadCustomer(ownProps.match.params.id));

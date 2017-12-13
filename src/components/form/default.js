@@ -11,6 +11,6 @@ export default class Form extends React.Component{
 		)
 	}
 	getField(config){
-		return <FormField key={REACT_KEY++} data={this.props.data[config.value]} />
+		return <FormField key={REACT_KEY++} config={config} data={this.props.data[config.value]} />
 	}
 }

@@ -17,7 +17,6 @@ export default class TableRow extends React.Component{
 		if(field.type == 'text'){
 			return (<td key={REACT_KEY++}>{this.props.data[field.value]}</td>)
 		}else if(field.type == 'link'){
-			console.log("field.path"+field.path);
 			let path = `${field.path}/${this.props.data[field.param]}`;
 			return (
 				<td key={REACT_KEY++}>

@@ -44,8 +44,6 @@ class CustomerList extends React.Component{
 		}
 	}
 	render(){
-		console.log("Inside Customer List Render");
-		console.log(this.props);
 		return(
 			<div>
 				<PageHeader title="CustomerList"/>
@@ -61,21 +59,18 @@ class CustomerList extends React.Component{
 
 }
 const mapStateToProps = state => {
-	console.log(state);
-  return {
-    data : state.customers.results
-  }
+	return {
+		data : state.customers.results
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-	console.log('Inside mapDispatchToProps');
-	console.log(CustomersAction);
-  return {
-    loadCustomers : () => dispatch(CustomersAction.loadCustomers())
-  }
+	return {
+		loadCustomers : () => dispatch(CustomersAction.loadCustomers())
+	}
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(CustomerList)

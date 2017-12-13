@@ -5,10 +5,8 @@ export default class CustomerAction{
     static loadCustomer(id) {  
         return (dispatch) => {
             axios.get('/api/dummy/'+id).then((response)=> {
-                   debugger;
               dispatch({type: ACTION_TYPES.CUSTOMER_GET_SUCCESS, payload: response.data});
             }).catch(error => {
-                  debugger;
               dispatch({type: ACTION_TYPES.CUSTOMER_GET_ERROR, error});
             });
            

@@ -15,7 +15,6 @@ export default class ListItem extends React.Component{
 	}
 	getField(field){
 		if(field.type == 'text'){
-			console.log("field.value"+field.value);
 			return (<div className={field.styles} key={field.value}>{this.props.data[field.value]}</div>)
 		}
 	}

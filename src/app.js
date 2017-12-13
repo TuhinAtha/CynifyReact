@@ -11,7 +11,6 @@ import CustomerDetail from './modules/customers/detail/default';
 import Dashboard from './modules/dashboard/default';
 
 const isActiveFunction = (match,location) =>{
-	console.info(match,location)
 	if(match){
 		return  match.path == location.pathname;
 	}
