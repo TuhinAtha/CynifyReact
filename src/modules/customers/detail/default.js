@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 
 import PageHeader from '../../../components/page-header/default';
+import PageContent from '../../../components/page-content/default';
 import Form from '../../../components/form/default';
 import PageFooter from '../../../components/page-footer/default';
 import CustomerAction from  '../../../actions/customer.action';
@@ -30,15 +31,7 @@ class CustomerDetail extends React.Component{
 					label: "Age",
 					value : "age",
 					type : "text"
-				},
-				{
-					label: "",
-					type : "link",
-					text : "view",
-					path : "/customer",
-					param : "_id"
 				}
-
 			]
 		}
 	}
@@ -46,7 +39,9 @@ class CustomerDetail extends React.Component{
 		return(
 			<div>
 				<PageHeader title="Customer Detail"/>
-				<Form data={this.props.data} config={this.config}/>
+				<PageContent>
+					<Form data={this.props.data} config={this.config}/>
+				</PageContent>
 				<PageFooter/>
 			</div>
 			);
