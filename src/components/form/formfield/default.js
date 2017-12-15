@@ -8,6 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from './textfield/default';
+import DateField from './datefield/default';
+
 
 /**Class Defination**/
 export default class FormField extends React.Component{
@@ -29,6 +31,11 @@ export default class FormField extends React.Component{
 	*/
 	getFieldByType(config){
 		switch(config.type){
+			case 'date' : {
+				return (
+					<DateField config={config} data={new Date(this.props.data)} />
+				)
+			};
 			default : {
 				return (
 					<TextField config={config} data={this.props.data} />
@@ -36,6 +43,7 @@ export default class FormField extends React.Component{
 			}
 		}
 	}
+	
 }
 
 /**PropTypes**/

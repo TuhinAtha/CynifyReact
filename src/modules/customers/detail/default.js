@@ -31,6 +31,11 @@ class CustomerDetail extends React.Component{
 					label: "Age",
 					value : "age",
 					type : "text"
+				},
+				{
+					label : "DOB",
+					value : "dob",
+					type : "date"
 				}
 			]
 		}

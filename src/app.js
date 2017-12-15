@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux'; 
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import configureStore from './store';  
 import Login from './modules/login/default';
 import CustomerList from './modules/customers/list/default';
@@ -54,7 +55,7 @@ try{
 	store.subscribe(() => {
 		console.log("Store Updated",store.getState());
 	});
-	ReactDom.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));
+	ReactDom.render(<Provider store={store}><MuiThemeProvider><App /></MuiThemeProvider></Provider>, document.getElementById('app'));
 }catch(e){
 	console.log("problem here");
 }
