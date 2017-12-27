@@ -10,25 +10,17 @@ import PropTypes from 'prop-types';
 import FormField from './formfield/default';
 
 /**Class Defination**/
-export default class Form extends React.Component{
-	/*
-	* Render Function
-	*/
-	render(){
-		let fields = this.props.config.fields;
-		return(
-			<form>
-				{fields.map((field) => this.getFormField(field))}
-			</form>
-		)
+export default function Form({config, data, onFormFieldChange}){
+	function getFormField(field){
+		return <FormField key={REACT_KEY++} config={field} data={data[field.value]} onFormFieldChange={onFormFieldChange}/>
 	}
-	/*
-	* To get field
-	* @param config Configuration of the Form Field
-	*/
-	getFormField(config){
-		return <FormField key={REACT_KEY++} config={config} data={this.props.data[config.value]} />
-	}
+	let fields =config.fields;
+	return(
+		<form>
+			{fields.map((field) => getFormField(field))}
+		</form>
+	)
+	
 }
 
 /**PropTypes**/

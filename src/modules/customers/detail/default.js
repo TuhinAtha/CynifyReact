@@ -45,15 +45,37 @@ class CustomerDetail extends React.Component{
 			<div>
 				<PageHeader title="Customer Detail"/>
 				<PageContent>
-					<Form data={this.props.data} config={this.config}/>
+					<Form data={this.props.data} config={this.config} onFormFieldChange={this.onFieldChange.bind(this)}/>
 				</PageContent>
 				<PageFooter/>
 			</div>
 			);
 	}
+	onFieldChange(e,value,config){
+		debugger;
+		this.props.updateProperty(config.value,value);
+	}
 	componentDidMount() {
 		this.props.loadCustomer();
     }
+    componentWillMount() {
+	  console.log('Component WILL MOUNT!')
+	}
+	componentWillReceiveProps(newProps) {    
+	  console.log('Component WILL RECIEVE PROPS!')
+	}
+	shouldComponentUpdate(newProps, newState) {
+	  return true;
+	}
+	componentWillUpdate(nextProps, nextState) {
+	  console.log('Component WILL UPDATE!');
+	}
+	componentDidUpdate(prevProps, prevState) {
+	  console.log('Component DID UPDATE!')
+	}
+	componentWillUnmount() {
+	  console.log('Component WILL UNMOUNT!')
+	}
 }
 const mapStateToProps = (state) => {
 	return {
@@ -64,6 +86,9 @@ const mapDispatchFromProps = (dispatch, ownProps) => {
 	return {
 		loadCustomer : () => {
 			return dispatch(CustomerAction.loadCustomer(ownProps.match.params.id));
+		},
+		updateProperty: (property,value) => {
+			return dispatch(CustomerAction.updateProperty(property,value));
 		}
 	}
 }

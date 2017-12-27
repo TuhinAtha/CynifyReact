@@ -12,4 +12,12 @@ export default class CustomerAction{
            
         };
     }
+    static updateProperty(property,value){
+    	let payload={};
+    	payload[property] = value;
+    	return {
+    		type: ACTION_TYPES.CUSTOMER_PROPERTY_CHANGE,
+    		payload: payload
+    	}
+    }
 }

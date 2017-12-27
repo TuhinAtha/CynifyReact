@@ -7,42 +7,34 @@
 /**Imports**/
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from './textfield/default';
-import DateField from './datefield/default';
+import TextInput from './textinput/default';
+import DateInput from './dateinput/default';
 
 
 /**Class Defination**/
-export default class FormField extends React.Component{
-	/*
-	* Render Function
-	*/
-	render(){
-		let config = this.props.config;
-		return(
-			<div className="form-group">
-				{config.label && <label className="col-form-label">{config.label}</label>}
-				{this.getFieldByType(config)}			
-			</div>
-		)
-	}
-	/*
-	* To get field based on type
-	* @param config Configuration of the Form Field
-	*/
-	getFieldByType(config){
+export default function FormField({config,data,onFormFieldChange}){
+	
+	const getFieldByType = () =>{
 		switch(config.type){
 			case 'date' : {
 				return (
-					<DateField config={config} data={new Date(this.props.data)} />
+					<DateInput config={config} data={new Date(data)}  onFormFieldChange={onFormFieldChange}/>
 				)
 			};
 			default : {
 				return (
-					<TextField config={config} data={this.props.data} />
+					<TextInput config={config} data={data}  onFormFieldChange={onFormFieldChange}/>
 				)
 			}
 		}
 	}
+
+	return(
+		<div className="form-group">
+			{/*config.label && <label className="col-form-label">{config.label}</label>*/}
+			{getFieldByType()}			
+		</div>
+	)
 	
 }
 

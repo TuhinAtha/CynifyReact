@@ -4,7 +4,9 @@ import ReactDom from 'react-dom';
 import { Provider } from 'react-redux'; 
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import configureStore from './store';  
+import config from './config';  
 import Login from './modules/login/default';
 import CustomerList from './modules/customers/list/default';
 import CustomerDetail from './modules/customers/detail/default';
@@ -50,12 +52,33 @@ export default class App extends React.Component {
     );
   }
 }
+window.appConfig = config;
 try{
 	const store = configureStore();
 	store.subscribe(() => {
 		console.log("Store Updated",store.getState());
 	});
-	ReactDom.render(<Provider store={store}><MuiThemeProvider><App /></MuiThemeProvider></Provider>, document.getElementById('app'));
+	if(appConfig.uxfw.toLowerCase() == 'material-ui'){
+		ReactDom.render(
+		<Provider store={store}>
+			<MuiThemeProvider>
+				<App />
+			</MuiThemeProvider>
+		</Provider>, document.getElementById('app'));
+	}else if(appConfig.uxfw.toLowerCase() == 'fabric-ui'){
+		ReactDom.render(
+		<Provider store={store}>
+			<Fabric>
+				<App />
+			</Fabric>
+		</Provider>, document.getElementById('app'));
+	}else{
+		ReactDom.render(
+		<Provider store={store}>
+			<App />
+		</Provider>, document.getElementById('app'));
+	}
+	
 }catch(e){
 	console.log("problem here");
 }
