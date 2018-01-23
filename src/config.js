@@ -1,3 +1,3 @@
 export default {
-	uxfw : 'fabric-ui'
+	uxfw : 'material-ui'
 }

@@ -1,21 +1,16 @@
 import React from 'react';
-export default class ListItem extends React.Component{
-	render(){
-		let data = this.props.data;
-		let config = this.props.config;
-		let fields = config.fields;
-		return(
-
-			<li className="list-group-item">
-			<div  className = {config.itemStyles ? config.itemStyles : ''}>
-			{fields.map((field)=>this.getField(field))}
-			</div>
-			</li>
-		);
+import ListItemBloack from './list-item-block/default'
+export default function ListItem({rKey,config,data}){
+	function getBlock(block,index){
+		return (<ListItemBloack key={`${rKey}-block-${index}`} rKey={`${rKey}-block-${index}`} config={block} data={data}/>)
 	}
-	getField(field){
-		if(field.type == 'text'){
-			return (<div className={field.styles} key={field.value}>{this.props.data[field.value]}</div>)
-		}
-	}
+	let blocks = config.blocks;
+	return(
+		<li className="list-group-item">
+		<div  className ="container-fluid">
+		{blocks.map((block,index)=>getBlock(block,index))}
+		</div>
+		</li>
+	);
+	
 }

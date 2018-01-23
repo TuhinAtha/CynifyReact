@@ -7,47 +7,30 @@
 /**Imports**/
 import React from 'react';
 import PropTypes from 'prop-types';
-import DatePicker from 'material-ui/DatePicker';
-import {  DatePicker as DatePickerFUI} from 'office-ui-fabric-react/lib/DatePicker';
+import TextField from 'material-ui/TextField';
 
 /**Class Defination**/
 export default function DateInput({config,data,onFormFieldChange}){
+	let aClassNames=['cyn-dateinput', ...(config.classNames ? config.classNames : [])];
 	function handleChange(e,value){
 		onFormFieldChange(e,value,config)
 	}
 	function handleChangeFUI(value){
 		onFormFieldChange(null,value,config)
 	}
-	if(appConfig.uxfw.toLowerCase() == 'material-ui'){
-		return(
-			<DatePicker
-			    name = {config.value}
-		        autoOk = {true}
-		        value={data}
-		        floatingLabelText={config.label}
-		        onChange = {handleChange}
-		    />
-		)
-	}if(appConfig.uxfw.toLowerCase() == 'fabric-ui'){
-		return(
-			<DatePickerFUI
-			 label={config.label}
-			 value={data}
-			 onSelectDate = {handleChangeFUI}
-			/>
-
-		)
-	}else{
-		return(
-			<DatePicker
-			    name = {config.value}
-		        autoOk = {true}
-		        value={data}
-		        floatingLabelText={config.label}
-		        onChange = {handleChange}
-		    />
-		)
-	}
+	return(
+		 <TextField
+		 	name = {config.key}
+	        type="date"
+	        className={aClassNames.join(' ')}
+	        value={data}
+	        label={config.label}
+	        onChange = {handleChange}
+	        InputLabelProps={{
+	          shrink: true,
+	        }}
+	      />
+	);
 	
 }
 
@@ -55,7 +38,7 @@ export default function DateInput({config,data,onFormFieldChange}){
 DateInput.propTypes = {
 	config : PropTypes.shape({
 		label: PropTypes.string,
-		value: PropTypes.any,
+		key: PropTypes.any,
 		type: PropTypes.string
 	}),
 	data : PropTypes.any

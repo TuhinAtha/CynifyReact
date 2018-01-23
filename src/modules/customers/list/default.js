@@ -5,49 +5,55 @@ import {ACTION_TYPES} from  '../../../actions/actionTypes';
 import CustomersAction from  '../../../actions/customers.action';
 
 import PageHeader from '../../../components/page-header/default';
-import Table from '../../../components/table/default';
+import List from '../../../components/list/default';
+import DataTable from '../../../components/data-table';
 import PageFooter from '../../../components/page-footer/default';
 class CustomerList extends React.Component{
 	constructor(){
 		super();
 		this.config = {
-			fields : [
+			key : "customers",
+			columns : [
 				{
-					label: "User Name",
-					value : "username",
-					type : "text"
+					title: "User Name",
+					name : "username"
 				},
 				{
-					label: "City",
-					value : "address",
-					type : "text"
+					title: "City",
+					name : "address"
 				},
 				{
-					label: "Contact",
-					value : "mobile",
-					type : "text"
+					title: "Contact",
+					name : "mobile"
 				},
 				{
-					label: "Age",
-					value : "age",
-					type : "text"
+					title: "Age",
+					name : "age"
 				},
 				{
-					label: "",
-					type : "link",
-					text : "view",
-					path : "/customer",
-					param : "_id"
+					title: "DOB",
+					name : "dob"
+				},
+				{
+					title: "",
+					name : "_id",
+					text : "View Details",
+					path : "/customer/{0}",
+					replacements:["_id"],
+					color : 'primary',
+					disable : false
 				}
-
-			]
+			],
+			dateColumns : ["dob"],
+			linkColumns : ["_id"],
+			sorting: [{ columnName: 'username', direction: 'asc' }],
 		}
 	}
 	render(){
 		return(
 			<div>
 				<PageHeader title="CustomerList"/>
-				<Table data={this.props.data} config={this.config}/>
+				<DataTable data={this.props.data} config={this.config} changeSorting={this.props.loadCustomers}/>
 				<PageFooter/>
 			</div>
 		);

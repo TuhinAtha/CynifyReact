@@ -16,6 +16,7 @@ export default function FormField({config,data,onFormFieldChange}){
 	
 	const getFieldByType = () =>{
 		switch(config.type){
+
 			case 'date' : {
 				return (
 					<DateInput config={config} data={new Date(data)}  onFormFieldChange={onFormFieldChange}/>
@@ -42,7 +43,7 @@ export default function FormField({config,data,onFormFieldChange}){
 FormField.propTypes = {
 	config : PropTypes.shape({
 		label: PropTypes.string,
-		value: PropTypes.any,
+		key: PropTypes.any,
 		type: PropTypes.string
 	}),
 	data : PropTypes.any

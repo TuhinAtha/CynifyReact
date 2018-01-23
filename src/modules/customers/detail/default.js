@@ -10,32 +10,66 @@ import CustomerAction from  '../../../actions/customer.action';
 class CustomerDetail extends React.Component{
 	constructor(){
 		super();
-		this.config = {
+		/*this.config = {
 			fields : [
 				{
 					label: "User Name",
-					value : "username",
+					key : "username",
 					type : "text"
 				},
 				{
 					label: "City",
-					value : "address",
+					key : "address",
 					type : "text"
 				},
 				{
 					label: "Contact",
-					value : "mobile",
+					key : "mobile",
 					type : "text"
 				},
 				{
 					label: "Age",
-					value : "age",
+					key : "age",
 					type : "text"
 				},
 				{
 					label : "DOB",
-					value : "dob",
+					key : "dob",
 					type : "date"
+				}
+			]
+		}*/
+		this.config = {
+			fields : [
+				{
+					label: "User Name",
+					key : "username",
+					type : "text",
+					classNames : ['customer-detail-username']
+				},
+				{
+					label: "City",
+					key : "address",
+					type : "text",
+					classNames : ['customer-detail-city']
+				},
+				{
+					label: "Contact",
+					key : "mobile",
+					type : "text",
+					classNames : ['customer-detail-mobile']
+				},
+				{
+					label: "Age",
+					key : "age",
+					type : "text",
+					classNames : ['customer-detail-age']
+				},
+				{
+					label : "DOB",
+					key : "dob",
+					type : "date",
+					classNames : ['customer-detail-dob']
 				}
 			]
 		}
@@ -52,8 +86,7 @@ class CustomerDetail extends React.Component{
 			);
 	}
 	onFieldChange(e,value,config){
-		debugger;
-		this.props.updateProperty(config.value,value);
+		this.props.updateProperty(config.key,value);
 	}
 	componentDidMount() {
 		this.props.loadCustomer();

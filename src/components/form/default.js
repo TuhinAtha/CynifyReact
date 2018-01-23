@@ -12,7 +12,7 @@ import FormField from './formfield/default';
 /**Class Defination**/
 export default function Form({config, data, onFormFieldChange}){
 	function getFormField(field){
-		return <FormField key={REACT_KEY++} config={field} data={data[field.value]} onFormFieldChange={onFormFieldChange}/>
+		return <FormField key={field.key} config={field} data={data[field.key]} onFormFieldChange={onFormFieldChange}/>
 	}
 	let fields =config.fields;
 	return(
