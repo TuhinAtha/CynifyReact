@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { connect } from 'react-redux';
-import {ACTION_TYPES} from  '../../../actions/actionTypes';
-import CustomersAction from  '../../../actions/customers.action';
+import _ from 'lodash';
+import { connect,bindActionCreators  } from 'react-redux';
+import {ACTION_TYPES} from  '../../../redux/actions/actionTypes';
+import CustomersAction from  '../../../redux/actions/customers.action';
 
 import PageHeader from '../../../components/page-header/default';
 import List from '../../../components/list/default';
@@ -47,32 +48,69 @@ class CustomerList extends React.Component{
 			dateColumns : ["dob"],
 			linkColumns : ["_id"],
 			sorting: [{ columnName: 'username', direction: 'asc' }],
-		}
+			filters:[
+				{
+					name:'address',
+					label:'Tab1',
+					type:'distinct',
+					control:'multiselect'
+				},
+				{
+					label:'Tab1',
+					type:'distinct',
+					name:'qualification',
+					control:'multiselect'
+
+				}
+			]
+		};
+		this.handleSortChange = this.handleSortChange.bind(this);
+		this.handlePageChange = this.handlePageChange.bind(this);
 	}
 	render(){
 		return(
 			<div>
 				<PageHeader title="CustomerList"/>
-				<DataTable data={this.props.data} config={this.config} changeSorting={this.props.loadCustomers}/>
+				<DataTable data={this.props.data} loading={this.props.fetching} config={this.config} onPageChange={this.handlePageChange} onSortChange={this.handleSortChange}/>
 				<PageFooter/>
 			</div>
 		);
 	}
-	
+	handlePageChange(page){
+		this.props.pageChange(page);
+	}
+	handleSortChange(sorting){
+		let sort={
+			sortBy : sorting.columnName,
+			sortDirection : (sorting.direction == 'asc') ? 1 : -1
+		}
+		this.props.sortChange(sort);
+	}
     componentDidMount() {
-      this.props.loadCustomers();
+    	this.props.loadCustomers();
     }
+    componentWillReceiveProps(newProps){
+    	console.log('Component WillReceiveProps!');
+    	if(!_.isEqual(this.props.params,newProps.params)){
+    		this.props.loadCustomers(newProps.params);
 
+    	}
+    	
+    }
 }
 const mapStateToProps = state => {
 	return {
-		data : state.customers.results
+		data : state.customers.data,
+		params : state.customers.params,
+		fetching : state.customers.fetching
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		loadCustomers : () => dispatch(CustomersAction.loadCustomers())
+		loadCustomers : (params) => dispatch(CustomersAction.loadCustomers(params)),
+		sortChange: (sort) => dispatch(CustomersAction.sortChange(sort)),
+		pageChange : (page) => dispatch(CustomersAction.pageChange(page)),
 	}
 }
 

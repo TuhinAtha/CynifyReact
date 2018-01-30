@@ -6,7 +6,7 @@ import PageHeader from '../../../components/page-header/default';
 import PageContent from '../../../components/page-content/default';
 import Form from '../../../components/form/default';
 import PageFooter from '../../../components/page-footer/default';
-import CustomerAction from  '../../../actions/customer.action';
+import CustomerAction from  '../../../redux/actions/customer.action';
 class CustomerDetail extends React.Component{
 	constructor(){
 		super();
