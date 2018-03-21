@@ -1,0 +1,2 @@
+export const CYN_APP_NAV_TOGGLE = 'CYN_APP_NAV_TOGGLE'
+export const CYN_APP_SET_AUTH = 'CYN_APP_SET_AUTH'

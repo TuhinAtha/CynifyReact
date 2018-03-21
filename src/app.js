@@ -3,11 +3,15 @@ import './app.scss'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import Routes from './routes'
+import AppNavigator from './components/navigator'
 
 class App extends React.Component {
   render() {
     return (
-       <Routes/>
+    	<div>
+	    	<AppNavigator/>
+	    	<Routes/>
+    	</div>
     );
   }
 }

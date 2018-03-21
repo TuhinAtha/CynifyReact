@@ -38,8 +38,7 @@ export default function customersReducer(state = initialData, action) {
         ...state,
         params : {
           ...state.params,
-          sortBy:action.payload.sortBy,
-          sortDirection:action.payload.sortDirection
+          sort:Object.assign({},action.payload)
         }
       }
       break;

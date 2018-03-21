@@ -27,13 +27,6 @@ export default function customerReducer(state = initialData, action) {
         ...state,
         data : data
       }
-      // state = {
-      //   ...state,
-      //   data : {
-      //     ...data,
-      //     action.payload.property : action.payload.value
-      //   }
-      // }
       break;
     }
       

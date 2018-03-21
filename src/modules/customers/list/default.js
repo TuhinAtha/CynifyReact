@@ -70,7 +70,7 @@ class CustomerList extends React.Component{
 	render(){
 		return(
 			<div>
-				<PageHeader title="CustomerList"/>
+				{/*<PageHeader title="CustomerList"/>*/}
 				<DataTable data={this.props.data} loading={this.props.fetching} config={this.config} onPageChange={this.handlePageChange} onSortChange={this.handleSortChange}/>
 				<PageFooter/>
 			</div>
@@ -80,11 +80,7 @@ class CustomerList extends React.Component{
 		this.props.pageChange(page);
 	}
 	handleSortChange(sorting){
-		let sort={
-			sortBy : sorting.columnName,
-			sortDirection : (sorting.direction == 'asc') ? 1 : -1
-		}
-		this.props.sortChange(sort);
+		this.props.sortChange(sorting);
 	}
     componentDidMount() {
     	this.props.loadCustomers();

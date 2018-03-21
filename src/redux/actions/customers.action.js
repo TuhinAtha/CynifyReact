@@ -1,7 +1,5 @@
 import ACTION_TYPES from './actionTypes';  
 import makeQuery from '../../utils/query-maker';  
-
-//import customerApi from '../api/customer.api';
 import axios from 'axios';
 export default class CustomersAction{
     static loadCustomers(params) {
@@ -16,7 +14,6 @@ export default class CustomersAction{
             }).catch(error => {
               dispatch({type: ACTION_TYPES.CUSTOMERS_GET_ERROR, error});
             });
-            
         };
     }
     static sortChange(sort) {

@@ -32,7 +32,6 @@ class DataTable extends React.Component{
 		this.handlePageChange = this.handlePageChange.bind(this);
 	}
 	handleSortChange(sorting){
-		//config.sorting = [].concat(sorting);
 		this.props.onSortChange(sorting[0]);
 	}
 	handlePageChange(currentPage){
@@ -50,7 +49,7 @@ class DataTable extends React.Component{
 		          {config.dateColumns && <DateTypeProvider for={config.dateColumns}/>}
 		          {config.linkColumns && <LinkTypeProvider for={config.linkColumns}/>}
 		          <SortingState
-		            sorting={config.sorting}
+		            sorting={data.sorting}
 		            onSortingChange={this.handleSortChange}
 		          />
 		          <PagingState
