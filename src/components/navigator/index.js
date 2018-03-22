@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { withStyles } from 'material-ui/styles';
 import styles from './styles';
 import { connect,bindActionCreators  } from 'react-redux';
-import { cynAppNavToggle } from '../../redux/actions/app.action';
+import { cynAppLogout } from '../../redux/actions/app.action';
 import { withPermission } from '../hoc/withPermission'
 const PrivateNavigatorItem = withPermission((props) => {
 	const { nav, allowedPermission } = props;
@@ -42,12 +42,18 @@ class AppNavigatior extends React.Component{
 	render() {
 		let {
 			classes,
+			auth,
 			navs,
-			permissions
+			permissions,
+			logout
 		} = this.props;
 		let {
 			isNavOpen
 		} = this.state;
+		if(auth === null){
+			return null
+		}
+
 		return(
 			<div>
 		      <AppBar className={classes.root} position="static">
@@ -58,6 +64,7 @@ class AppNavigatior extends React.Component{
 		          <Typography type="title" color="inherit" className={classes.flex}>
 		            Title
 		          </Typography>
+		           <Button color="inherit" onClick={logout}>Logout</Button>
 		        </Toolbar>
 		      </AppBar>
 		      <Drawer open={isNavOpen} onClose={() => this.toggleNav()}>
@@ -67,15 +74,8 @@ class AppNavigatior extends React.Component{
 		);
 	}
 	getNavList(navs){
-		debugger;
 		let listItems = navs && navs.map((nav, index)=>(
 			<PrivateNavigatorItem  key={`nav-${index}`} nav={nav} allowedPermission='CanViewCustomerList'/>
-				/*<ListItem key={`nav-${index}`} button component={Link} to={nav.to}>
-	          <ListItemIcon>
-	            <Icon>{nav.icon ? nav.icon : ''}</Icon>
-	          </ListItemIcon>
-	          <ListItemText inset primary={nav.text} />
-	      </ListItem>*/
       )
 		)
 		return(<List component="nav">
@@ -85,12 +85,13 @@ class AppNavigatior extends React.Component{
 }
 const mapStateToProps = (state) => {
 	return {
-		navs : state.app.navs
+		navs : state.app.navs,
+		auth : state.app.auth
 	}
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+		logout : () => dispatch(cynAppLogout())
 	}
 }
 export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(AppNavigatior));

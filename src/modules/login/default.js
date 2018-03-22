@@ -43,7 +43,15 @@ class Login extends React.Component{
 			username: this.state.username,
 			password: this.state.password
 		}).then((data)=>{
-			self.props.history.push('/dashboard')
+			debugger;
+			if(window.localStorage.getItem('path_before_login')){
+				let pathToRedirect = window.localStorage.getItem('path_before_login')
+				window.localStorage.removeItem('path_before_login')
+				self.props.history.push(pathToRedirect)
+			}else{
+				self.props.history.push('/dashboard')
+			}
+			
 		}).catch(()=>{
 			console.log("Error");
 		})

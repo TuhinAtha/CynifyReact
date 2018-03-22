@@ -13,6 +13,7 @@ const appReducer = (state = {
 },action) => {
 	switch(action.type) {
 		case CYN_APP_SET_AUTH : {
+			debugger
 			return {
 				...state,
 				auth : action.payload				

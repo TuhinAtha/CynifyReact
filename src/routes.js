@@ -25,7 +25,7 @@ class Routes extends React.Component {
        <Router history={history}>
                <Switch>
                   <Route exact path='/login' component={Login} />
-                  <PrivateRoute exact path='/' component={Dashboard} allowedPermission='CanViewDashboard'/>
+                  <PrivateRoute exact path='/Dashboard' component={Dashboard} allowedPermission='CanViewDashboard'/>
                   <PrivateRoute exact path='/customerlist' component={CustomerList} allowedPermission='CanViewCustomerList'/>
                   <PrivateRoute exact path='/customer/:id' component={CustomerDetail} />
                </Switch>
@@ -35,7 +35,7 @@ class Routes extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    auth : state.auth
+    auth : state.app.auth
   }
 }
 export default connect(
