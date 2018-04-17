@@ -1,11 +1,16 @@
 const styles = theme => {
+	debugger
 	return{
 		root:{
-			background : theme.palette.secondary[theme.palette.type]
 		},
 		flex:{
 			flex: 1
+		},
+		content: {
+			padding:theme.spacing.unit * 4,
+			marginTop: theme.spacing.unit * 4
 		}
 	}
+	
 };
 export default styles;

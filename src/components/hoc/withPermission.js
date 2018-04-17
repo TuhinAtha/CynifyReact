@@ -4,11 +4,16 @@ export const withPermission = (WrappedComponent,ElseComponent) => {
 
 	class Permission extends React.Component {
     render() {
-    	if(this.props.permissions.indexOf(this.props.allowedPermission) >= 0){
-      		return (<WrappedComponent {...this.props}/>)
+
+      let innerProps = {...this.props}
+      delete innerProps.allowedPermission
+      delete innerProps.permissions
+
+    	if((this.props.allowedPermission === 'ALL') || (this.props.permissions.indexOf(this.props.allowedPermission) >= 0)){
+      		return (<WrappedComponent {...innerProps}/>)
     	}
 			if(ElseComponent){
-				return (<ElseComponent {...this.props}/>)
+				return (<ElseComponent {...innerProps}/>)
 			}
 			return null
     }

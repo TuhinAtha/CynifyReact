@@ -7,8 +7,11 @@ import storage from 'redux-persist/lib/storage'
 import axios from 'axios';
 axios.interceptors.response.use(null, function(err) {
 	if(err.response.status === 401) {
-		window.localStorage.setItem('path_before_login', window.location.pathname);
 		window.location.pathname = '/login';
+    return;
+	}
+	if(err.response.status === 504) {
+		window.location.pathname = '/unreachable';
     return;
 	}
 	return Promise.reject(error);
@@ -17,7 +20,7 @@ axios.interceptors.response.use(null, function(err) {
  
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: storage
 }
  
 const persistedReducer = persistReducer(persistConfig, reducers)

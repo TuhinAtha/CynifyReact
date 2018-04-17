@@ -16,10 +16,28 @@ export default class CustomersAction{
             });
         };
     }
-    static sortChange(sort) {
-      return {type: ACTION_TYPES.CUSTOMERS_SORT_CHANGE, payload: sort};
+    static setFilters(filters) {
+      let cFilters = {};
+      for(let i in filters){
+        let obj = {};
+        if(filters[i].type){
+          obj.t = filters[i].type
+        }
+        if(filters[i].diff){
+          obj.d = filters[i].diff
+        }
+
+        cFilters[filters[i].name] = {...obj};
+      }
+      return {type: ACTION_TYPES.CUSTOMERS_SET_FILTERS, payload: cFilters};
     }
-    static pageChange(page) {
-      return {type: ACTION_TYPES.CUSTOMERS_PAGE_CHANGE, payload: page};
+    static setSort(sort) {
+      return {type: ACTION_TYPES.CUSTOMERS_SET_SORT, payload: sort};
+    }
+    static setPage(page) {
+      return {type: ACTION_TYPES.CUSTOMERS_SET_PAGE, payload: page};
+    }
+    static setQuery(q) {
+      return {type: ACTION_TYPES.CUSTOMERS_SET_QUERY, payload: q};
     }
 }

@@ -4,8 +4,9 @@ const initialData = {
 	fetched : false,
 	error : false,
   params : {},
-	data : {
+ 	data : {
     results : [],
+    filterOptions: {},
     totalCount : 0
   },
   
@@ -25,7 +26,8 @@ export default function customersReducer(state = initialData, action) {
     		data : {
           ...state.data,
           results : action.payload.results,
-          totalCount : action.payload.totalCount
+          totalCount : action.payload.totalCount,
+          filterOptions: action.payload.filterOptions
           
         },
         fetched : true,
@@ -33,7 +35,7 @@ export default function customersReducer(state = initialData, action) {
 	    }
 	    break;
     }
-    case ACTION_TYPES.CUSTOMERS_SORT_CHANGE: {
+    case ACTION_TYPES.CUSTOMERS_SET_SORT: {
       state = {
         ...state,
         params : {
@@ -43,7 +45,7 @@ export default function customersReducer(state = initialData, action) {
       }
       break;
     }
-    case ACTION_TYPES.CUSTOMERS_PAGE_CHANGE: {
+    case ACTION_TYPES.CUSTOMERS_SET_PAGE: {
       state = {
         ...state,
         params : {
@@ -52,6 +54,25 @@ export default function customersReducer(state = initialData, action) {
         }
       }
       break;
+    }
+     case ACTION_TYPES.CUSTOMERS_SET_QUERY: {
+      state = {
+        ...state,
+        params : {
+          ...state.params,
+          q : action.payload
+        }
+      }
+      break;
+    }
+    case ACTION_TYPES.CUSTOMERS_SET_FILTERS: {
+      state = {
+        ...state,
+        params : {
+          ...state.params,
+          filters : action.payload
+        }
+      }
     }
     default: {
     }

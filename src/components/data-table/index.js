@@ -41,7 +41,7 @@ class DataTable extends React.Component{
 		let {config,data,loading,onSortChange,onPageChange,classes} = this.props;
 		return(
 			 <Paper className={classes.root}>
-			    <DataTableSearch filters={config.filters}/>
+			    <DataTableSearch filters={config.filters} filterOptions={data.filterOptions} onFilterChanged={this.props.onFilterChanged}/>
 		        <Grid
 		          rows={data.results}
 		          columns={config.columns}

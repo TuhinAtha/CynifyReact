@@ -3,8 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
-import MenuIcon from 'material-ui-icons/Menu';
+import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
 import styles from './styles';
 class PageHeader extends React.Component{
@@ -12,7 +11,7 @@ class PageHeader extends React.Component{
 		super(props);
 	}
 	render(){
-		let {classes,title} = this.props;
+		let {classes,title, actions} = this.props;
 		return(
 			<div>
 		      <AppBar className={classes.root} position="static">
@@ -20,10 +19,15 @@ class PageHeader extends React.Component{
 		          <Typography type="title" color="inherit" className={classes.flex}>
 		            {title}
 		          </Typography>
-		          <Button  mini aria-label="edit" color="secondary">
-		          	<AddIcon />
-		          	Add
-		          </Button>
+		          {
+		          	actions && actions.map((action, index)=>{
+		          		return (<Button  mini aria-label={action.text} color="primary">
+				          	{action.icon && (<Icon>action.icon</Icon>)}
+				          	action.text
+				          </Button>)
+		          	})
+		          }
+		          
 		        </Toolbar>
 		      </AppBar>
 		    </div>
