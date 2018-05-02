@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import _ from 'lodash';
 import { connect,bindActionCreators  } from 'react-redux';
-import {ACTION_TYPES} from  '../../../redux/actions/actionTypes';
 import CustomersAction from  '../../../redux/actions/customers.action';
 
 import PageHeader from '../../../components/page-header/default';
-import List from '../../../components/list/default';
 import DataTable from '../../../components/data-table';
 import PageFooter from '../../../components/page-footer/default';
-class CustomerList extends React.Component{
+class ListPage extends React.Component{
 	constructor(props){
 		super(props);
 	}
@@ -57,4 +55,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CustomerList)
+)(ListPage)
